@@ -10,3 +10,5 @@ async function loadItems() {
   document.getElementById("items").innerHTML = data.map((i) => `<li>${i.name}</li>`).join("");
 }
 loadItems();
+
+// TODO: surface fetch errors to the user
