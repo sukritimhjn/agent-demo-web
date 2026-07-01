@@ -11,4 +11,22 @@ async function loadItems() {
 }
 loadItems();
 
+async function checkHealth() {
+  const status = document.getElementById("status");
+  try {
+    const res = await fetch("http://localhost:3000/health");
+    const data = await res.json();
+    if (res.ok && data.status === "ok") {
+      status.textContent = "API: online";
+      status.style.color = "green";
+    } else {
+      throw new Error("unhealthy");
+    }
+  } catch {
+    status.textContent = "API: offline";
+    status.style.color = "red";
+  }
+}
+checkHealth();
+
 // TODO: surface fetch errors to the user
