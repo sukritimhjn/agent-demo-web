@@ -1,7 +1,19 @@
-// GAP (see issue): the login form submits even when email is empty.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 document.getElementById("login").addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log("submit", document.getElementById("email").value);
+  const email = document.getElementById("email").value.trim();
+  const error = document.getElementById("email-error");
+  if (email === "") {
+    error.textContent = "Email is required.";
+    return;
+  }
+  if (!EMAIL_RE.test(email)) {
+    error.textContent = "Enter a valid email address.";
+    return;
+  }
+  error.textContent = "";
+  console.log("submit", email);
 });
 
 async function loadItems() {
