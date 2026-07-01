@@ -5,9 +5,11 @@ document.getElementById("login").addEventListener("submit", (e) => {
 });
 
 async function loadItems() {
+  const list = document.getElementById("items");
+  list.innerHTML = "<li>Loading...</li>";
   const res = await fetch("http://localhost:3000/items?page=1");
   const data = await res.json();
-  document.getElementById("items").innerHTML = data.map((i) => `<li>${i.name}</li>`).join("");
+  list.innerHTML = data.map((i) => `<li>${i.name}</li>`).join("");
 }
 loadItems();
 
